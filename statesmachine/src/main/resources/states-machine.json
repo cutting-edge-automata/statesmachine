@@ -1,24 +1,49 @@
 {
-	"initialState": "E",
+	"name": "Simple State Machine",
 	"states": [
-		"E",
-		"E'",
-		"T",
-		"T'",
-		"F"
+		{
+			"name": "Q0",
+			"initialState": true
+		},
+		{
+			"name": "Q1"
+		},
+		{
+			"name": "QF",
+			"finalState": true
+		}
 	],
 	"events": [
-		"number",
-		"id",
-		"(",
-		")",
-		"+",
-		"*",
-		"$"
-	],
-	"transition": [
 		{
-			"sourceState": "E"
+			"name": "a"
+		},
+		{
+			"name": "b"
+		},
+		{
+			"name": "!"
+		}
+	],
+	"transitions": [
+		{
+			"source": "Q0",
+			"target": "Q0",
+			"event": "a"
+		},
+		{
+			"source": "Q0",
+			"target": "Q1",
+			"event": "b"
+		},
+		{
+			"source": "Q1",
+			"target": "Q1",
+			"event": "b"
+		},
+		{
+			"source": "Q1",
+			"target": "QF",
+			"event": "!"
 		}
 	]
 }

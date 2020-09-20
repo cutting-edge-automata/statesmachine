@@ -1,24 +1,18 @@
 package com.cutting.edge.automata.state;
 
-public abstract class AbstractState<S> implements State<S> {
+public class AbstractState implements State {
 
 	public final boolean initalState;
 	public final boolean finalState;
-	public final State<S> state;
 	public final String name;
 	public final int id;
 
-	public AbstractState(State<S> state, boolean initialState, boolean finalState) {
+	public AbstractState(String name, boolean initialState, boolean finalState) {
 		this.initalState = initialState;
 		this.finalState = finalState;
-		this.name = state.toString();
-		this.state = state;
+		this.name = name;
 		this.id = hashCode();
 
-	}
-
-	public State<S> getState() {
-		return state;
 	}
 
 	public int getStateId() {
@@ -53,8 +47,35 @@ public abstract class AbstractState<S> implements State<S> {
 		result = prime * result + id;
 		result = prime * result + (initalState ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AbstractState other = (AbstractState) obj;
+		if (finalState != other.finalState)
+			return false;
+		if (id != other.id)
+			return false;
+		if (initalState != other.initalState)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "AbstractState [initalState=" + initalState + ", finalState=" + finalState + ", name=" + name + ", id="
+				+ id + "]";
+	}
 }

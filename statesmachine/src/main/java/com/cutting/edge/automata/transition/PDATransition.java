@@ -1,31 +1,19 @@
 package com.cutting.edge.automata.transition;
 
-import com.cutting.edge.automata.action.Action;
 import com.cutting.edge.automata.event.Event;
 import com.cutting.edge.automata.state.State;
 
-public class PDATransition<S, E, T> extends AbstractTransition<S, E, T> {
+public class PDATransition extends AbstractTransition {
 
-	private final T topOfStack;
-	private Action<E, T> action;
+	private final String topOfStack;
 
-	public PDATransition(State<S> sourceState, State<S> targetState, Event<E> event, T topOfStack) {
+	public PDATransition(State sourceState, State targetState, Event event, String topOfStack) {
 		super(sourceState, targetState, event);
 		this.topOfStack = topOfStack;
 	}
 
-	public Action<E, T> getAction() {
-		return action;
-	}
-
-	public void setAction(Action<E, T> action) {
-		this.action = action;
-	}
-
-	public T getTopOfStack() {
+	public String getTopOfStack() {
 		return topOfStack;
 	}
-
-	
 
 }

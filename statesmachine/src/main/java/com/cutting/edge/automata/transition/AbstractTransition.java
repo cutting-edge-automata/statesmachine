@@ -3,37 +3,43 @@ package com.cutting.edge.automata.transition;
 import com.cutting.edge.automata.event.Event;
 import com.cutting.edge.automata.state.State;
 
-public class AbstractTransition<S, E, T> implements Transition<S, E, T> {
+public class AbstractTransition implements Transition {
 
-	private final State<S> sourceState;
-	private final State<S> targetState;
-	private final Event<E> event;
+	private final State sourceState;
+	private final State targetState;
+	private final Event event;
 
-	public AbstractTransition(State<S> sourceState, State<S> targetState, Event<E> event) {
+	public AbstractTransition(State sourceState, State targetState, Event event) {
 		this.sourceState = sourceState;
 		this.targetState = targetState;
 		this.event = event;
 	}
 
 	@Override
-	public State<S> getSourceState() {
+	public State getSourceState() {
 		return sourceState;
 	}
 
 	@Override
-	public State<S> getTargetState() {
+	public State getTargetState() {
 		return targetState;
 	}
 
 	@Override
-	public Event<E> getEvent() {
+	public Event getEvent() {
 		return event;
 	}
 
 	@Override
-	public void log(Transition<S, E, T> transition) {
-		System.out.println("Transition completed from " + transition.getSourceState() + " to "
-				+ transition.getTargetState() + " on " + event);
+	public void log(Transition transition) {
+		System.out.println("Transition completed from " + transition.getSourceState().getStateName() + " to "
+				+ transition.getTargetState().getStateName() + " on " + event.getEvent());
+	}
+
+	@Override
+	public String toString() {
+		return "AbstractTransition [sourceState=" + sourceState + ", targetState=" + targetState + ", event=" + event
+				+ "]";
 	}
 
 }

@@ -1,47 +1,45 @@
-package com.cutting.edge.automata;
+package com.cutting.edge.automata.statesmachine;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-import com.cutting.edge.automata.event.Event;
 import com.cutting.edge.automata.event.PDAEvent;
 import com.cutting.edge.automata.exception.EventNotFoundException;
 import com.cutting.edge.automata.exception.StateNotFoundException;
 import com.cutting.edge.automata.exception.TransitionNotFoundException;
 import com.cutting.edge.automata.state.PDAState;
-import com.cutting.edge.automata.state.State;
 import com.cutting.edge.automata.transition.PDATransition;
 import com.cutting.edge.automata.utils.StatesMachineConstant;
 
-public class PDAStatesMachine<S, E, T> {
+public class PDAStatesMachine {
 
-	private final Set<PDAState<S>> states = new HashSet<PDAState<S>>();
-	private final Set<PDAEvent<E>> events = new HashSet<PDAEvent<E>>();
-	private final Set<PDATransition<S, E, T>> transitions = new HashSet<PDATransition<S, E, T>>();
-	private final Stack<T> stack = new Stack<T>();
-	private PDAState<S> currentState;
+	private final Set<PDAState> states = new HashSet<PDAState>();
+	private final Set<PDAEvent> events = new HashSet<PDAEvent>();
+	private final Set<PDATransition> transitions = new HashSet<PDATransition>();
+	private final Stack stack = new Stack();
+	private PDAState currentState;
 
-	public PDAState<S> getCurrentState() {
+	public PDAState getCurrentState() {
 		return currentState;
 	}
 
-	public Set<PDAState<S>> getStates() {
+	public Set<PDAState> getStates() {
 		return states;
 	}
 
-	public Set<PDAEvent<E>> getEvents() {
+	public Set<PDAEvent> getEvents() {
 		return events;
 	}
 
-	public Set<PDATransition<S, E, T>> getTransitions() {
+	public Set<PDATransition> getTransitions() {
 		return transitions;
 	}
 
-	public void init(PDAState<S> initState, T topOfStack) {
+	public void init(PDAState initState, String topOfStack) {
 		if (states.contains(initState)) {
 			currentState = initState;
-			stack.push((T) StatesMachineConstant.EOL);
+			stack.push(StatesMachineConstant.EOL);
 			stack.push(topOfStack);
 
 		} else {
@@ -50,10 +48,10 @@ public class PDAStatesMachine<S, E, T> {
 
 	}
 
-	public void changeState(PDAEvent<E> event, T oldStack, T newStack) {
+	public void changeState(PDAEvent event, String oldStack, String newStack) {
 
 		if (getEvents().contains(event) && transitionExist(currentState, event, oldStack)) {
-			for (PDATransition<S, E, T> transition : transitions) {
+			for (PDATransition transition : transitions) {
 				if (transition.getEvent().equals(event) && transition.getSourceState().equals(currentState)
 						&& transition.getTopOfStack().equals(oldStack)) {
 					if (newStack.equals(StatesMachineConstant.EPSILON) || oldStack.equals(StatesMachineConstant.EPSILON)
@@ -70,8 +68,8 @@ public class PDAStatesMachine<S, E, T> {
 		}
 	}
 
-	private boolean transitionExist(PDAState<S> state, PDAEvent<E> event, T oldStack) {
-		for (PDATransition<S, E, T> transition : transitions) {
+	private boolean transitionExist(PDAState state, PDAEvent event, String oldStack) {
+		for (PDATransition transition : transitions) {
 			if (transition.getEvent().equals(event) && transition.getSourceState().equals(currentState)
 					&& transition.getTopOfStack().equals(oldStack)) {
 				return true;
