@@ -1,6 +1,6 @@
 
 
-DFA -> a*b* 
+DFA -> a(n)b(n) n > 1 
 
 InputString -> aaaaabbb
 
