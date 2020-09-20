@@ -1,0 +1,24 @@
+{
+	"initialState": "E",
+	"states": [
+		"E",
+		"E'",
+		"T",
+		"T'",
+		"F"
+	],
+	"events": [
+		"number",
+		"id",
+		"(",
+		")",
+		"+",
+		"*",
+		"$"
+	],
+	"transition": [
+		{
+			"sourceState": "E"
+		}
+	]
+}
