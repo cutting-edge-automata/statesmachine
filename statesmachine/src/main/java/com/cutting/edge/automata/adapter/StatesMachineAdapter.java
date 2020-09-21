@@ -9,11 +9,12 @@ import com.cutting.edge.automata.config.model.StateConfig;
 import com.cutting.edge.automata.config.model.TransitionConfig;
 import com.cutting.edge.automata.event.AbstractEvent;
 import com.cutting.edge.automata.event.Event;
-import com.cutting.edge.automata.exception.StateNotFoundException;
+import com.cutting.edge.automata.exception.StatesMachineException;
 import com.cutting.edge.automata.state.AbstractState;
 import com.cutting.edge.automata.state.State;
 import com.cutting.edge.automata.transition.AbstractTransition;
 import com.cutting.edge.automata.transition.Transition;
+import com.cutting.edge.automata.utils.StatesMachineConstant;
 
 public class StatesMachineAdapter {
 
@@ -35,13 +36,16 @@ public class StatesMachineAdapter {
 		for (TransitionConfig transitionConfig : configs) {
 			State source = (State) states.stream()
 					.filter(stateConfig -> stateConfig.getStateName().equals(transitionConfig.getSource())).findFirst()
-					.get();
+					.orElseThrow(() -> new StatesMachineException(
+							transitionConfig.getSource() + StatesMachineConstant.STATE_NOT_FOUND));
 			State target = (State) states.stream()
 					.filter(stateConfig -> stateConfig.getStateName().equals(transitionConfig.getTarget())).findFirst()
-					.get();
+					.orElseThrow(() -> new StatesMachineException(
+							transitionConfig.getTarget() + StatesMachineConstant.STATE_NOT_FOUND));
 			Event event = (Event) events.stream()
 					.filter(eventConfig -> eventConfig.getEvent().equals(transitionConfig.getEvent())).findFirst()
-					.get();
+					.orElseThrow(() -> new StatesMachineException(
+							transitionConfig.getEvent() + StatesMachineConstant.EVENT_NOT_FOUND));
 			transitions.add(new AbstractTransition(source, target, event));
 		}
 

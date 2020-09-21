@@ -1,5 +1,5 @@
 {
-	"name": "Simple State Machine",
+	"name": "Finite State Machine",
 	"states": [
 		{
 			"name": "Q0",

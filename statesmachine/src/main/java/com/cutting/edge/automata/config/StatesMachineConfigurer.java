@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import com.cutting.edge.automata.adapter.StatesMachineAdapter;
 import com.cutting.edge.automata.config.model.StatesMachineConfig;
+import com.cutting.edge.automata.exception.StatesMachineException;
 import com.cutting.edge.automata.state.State;
 import com.cutting.edge.automata.statesmachine.StatesMachine;
+import com.cutting.edge.automata.utils.StatesMachineConstant;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -20,13 +22,14 @@ public class StatesMachineConfigurer {
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		File file = new File(filePath);
 		StatesMachineConfig machineConfig = mapper.readValue(file, StatesMachineConfig.class);
-		StatesMachine machine = new StatesMachine(machineConfig.getName());
+		StatesMachine machine = new StatesMachine();
+		machine.setName(machineConfig.getName());
 		machine.getStates().addAll(StatesMachineAdapter.configToStates(machineConfig.getStates()));
 		machine.getEvents().addAll(StatesMachineAdapter.configToEvents(machineConfig.getEvents()));
 		machine.getTransitions().addAll(StatesMachineAdapter.configToTransitions(machineConfig.getTransitions(),
 				machine.getStates(), machine.getEvents()));
-		State initState = machine.getStates().stream().filter(state -> state.isInitalState()).findFirst().get();
-
+		State initState = machine.getStates().stream().filter(state -> state.isInitalState()).findFirst().orElseThrow(
+				() -> new StatesMachineException(machine.getName() + StatesMachineConstant.INITIAL_STATE_NOT_FOUNT));
 		machine.init(initState);
 		return machine;
 
@@ -38,11 +41,10 @@ public class StatesMachineConfigurer {
 		StatesMachine machine = configurer.config(filePath);
 		String input = "aaaaabbb";
 		boolean accepted = machine.accept(input);
-		if (accepted) {
+		if (accepted)
 			System.out.println("This States Machine accepts -> " + input);
-		} else {
-			System.out.println("States Machine failed");
-		}
+		else
+			throw new StatesMachineException(machine.getName());
 	}
 
 }

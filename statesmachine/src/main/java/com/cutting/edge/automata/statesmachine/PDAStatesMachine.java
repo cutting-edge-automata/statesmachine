@@ -5,9 +5,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import com.cutting.edge.automata.event.PDAEvent;
-import com.cutting.edge.automata.exception.EventNotFoundException;
-import com.cutting.edge.automata.exception.StateNotFoundException;
-import com.cutting.edge.automata.exception.TransitionNotFoundException;
+import com.cutting.edge.automata.exception.StatesMachineException;
 import com.cutting.edge.automata.state.PDAState;
 import com.cutting.edge.automata.transition.PDATransition;
 import com.cutting.edge.automata.utils.StatesMachineConstant;
@@ -17,7 +15,7 @@ public class PDAStatesMachine {
 	private final Set<PDAState> states = new HashSet<PDAState>();
 	private final Set<PDAEvent> events = new HashSet<PDAEvent>();
 	private final Set<PDATransition> transitions = new HashSet<PDATransition>();
-	private final Stack stack = new Stack();
+	private final Stack<String> stack = new Stack<String>();
 	private PDAState currentState;
 
 	public PDAState getCurrentState() {
@@ -41,9 +39,8 @@ public class PDAStatesMachine {
 			currentState = initState;
 			stack.push(StatesMachineConstant.EOL);
 			stack.push(topOfStack);
-
 		} else {
-			throw new StateNotFoundException(initState.getStateName());
+			throw new StatesMachineException(initState.getStateName() + StatesMachineConstant.STATE_NOT_FOUND);
 		}
 
 	}
@@ -64,7 +61,7 @@ public class PDAStatesMachine {
 				}
 			}
 		} else {
-			throw new EventNotFoundException(event.toString());
+			throw new StatesMachineException(event.toString() + StatesMachineConstant.EVENT_NOT_FOUND);
 		}
 	}
 
@@ -75,6 +72,7 @@ public class PDAStatesMachine {
 				return true;
 			}
 		}
-		throw new TransitionNotFoundException("from " + state + " with " + event);
+		throw new StatesMachineException(
+				"from " + state + " with " + event + StatesMachineConstant.TRANSITION_NOT_FOUND);
 	}
 }
