@@ -26,6 +26,10 @@ public class StatesMachineBuilder {
 		return new EventBuilder(machine);
 	}
 
+	public TransitionBuilder transitions() {
+		return new TransitionBuilder(machine);
+	}
+	
 	public StatesMachine build() {
 		return machine;
 	}

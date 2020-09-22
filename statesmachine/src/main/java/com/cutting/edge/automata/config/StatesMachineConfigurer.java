@@ -36,15 +36,11 @@ public class StatesMachineConfigurer {
 	}
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
-		String filePath = "D:/Java/Java Parser/Cuttig Edge Automata/statesmachine/statesmachine/src/main/resources/states-machine.json";
+		String filePath = "D:/Java/Automata/Cuttig Edge Automata/statesmachine/statesmachine/src/main/resources/states-machine.json";
 		StatesMachineConfigurer configurer = new StatesMachineConfigurer();
 		StatesMachine machine = configurer.config(filePath);
 		String input = "aaaaabbb";
-		boolean accepted = machine.accept(input);
-		if (accepted)
-			System.out.println("This States Machine accepts -> " + input);
-		else
-			throw new StatesMachineException(machine.getName());
+		machine.accept(input);
 	}
 
 }
