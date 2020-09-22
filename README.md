@@ -1,25 +1,47 @@
 
+		StatesMachineBuilder builder = new StatesMachineBuilder();
+		StatesMachine machine = builder.withName("Finite Automata")
+									   .states()
+									   .initState("Q0")
+									   .withState("Q1")
+									   .finalState("QF")
+									   .events()
+									   .withEvent("a")
+									   .withEvent("b")
+									   .withEvent("!")
+									   .transitions()
+									   .withTransition("Q0", "Q0", "a")
+									   .withTransition("Q0", "Q1", "b")
+									   .withTransition("Q1", "Q1", "b")
+									   .withTransition("Q1", "QF", "!")
+									   .build();
 
-DFA -> a(n)b(n) n > 1 
+		String inputString = "aaaaaaaaaaabbbbbbb";
+		machine.accept(inputString);
 
-InputString -> aaaaabbb
+    Output -> 
+    
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q0 on a
+    Transition completed from Q0 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to Q1 on b
+    Transition completed from Q1 to QF on !
 
-Transition completed from Q0 to Q0 on a
-
-Transition completed from Q0 to Q0 on a
-
-Transition completed from Q0 to Q0 on a
-
-Transition completed from Q0 to Q0 on a
-
-Transition completed from Q0 to Q0 on a
-
-Transition completed from Q0 to Q1 on b
-
-Transition completed from Q1 to Q1 on b
-
-Transition completed from Q1 to Q1 on b
-
-Transition completed from Q1 to QF on !
-
-This States Machine accepts -> aaaaabbb
