@@ -1,5 +1,7 @@
 package com.cutting.edge.automata.config.model;
 
+import java.util.Set;
+
 public class TransitionConfig extends AbstractConfig {
 
 	private static final long serialVersionUID = 535908406704327200L;
@@ -7,6 +9,7 @@ public class TransitionConfig extends AbstractConfig {
 	public String source;
 	public String event;
 	public String target;
+	public Set<StackActionConfig> actions;
 
 	public String getSource() {
 		return source;
@@ -32,9 +35,12 @@ public class TransitionConfig extends AbstractConfig {
 		this.target = target;
 	}
 
-	@Override
-	public String toString() {
-		return "TransitionConfig [source=" + source + ", event=" + event + ", target=" + target + "]";
+	public Set<StackActionConfig> getActions() {
+		return actions;
+	}
+
+	public void setActions(Set<StackActionConfig> actions) {
+		this.actions = actions;
 	}
 
 }

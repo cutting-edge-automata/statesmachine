@@ -1,6 +1,6 @@
 package com.cutting.edge.automata.event;
 
-public class AbstractEvent implements Event {
+public abstract class AbstractEvent implements Event {
 
 	public final String event;
 
@@ -8,6 +8,7 @@ public class AbstractEvent implements Event {
 		this.event = event;
 	}
 
+	@Override
 	public String getEvent() {
 		return event;
 	}
@@ -41,6 +42,5 @@ public class AbstractEvent implements Event {
 			return false;
 		return true;
 	}
-	
-	
+
 }

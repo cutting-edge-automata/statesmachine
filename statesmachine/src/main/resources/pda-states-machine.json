@@ -1,0 +1,79 @@
+{
+	"name": "Pushdown State Machine",
+	"states": [
+		{
+			"name": "Q0",
+			"initialState": true
+		},
+		{
+			"name": "Q1"
+		},
+		{
+			"name": "QF",
+			"finalState": true
+		}
+	],
+	"events": [
+		{
+			"name": "a"
+		},
+		{
+			"name": "b"
+		},
+		{
+			"name": "!"
+		}
+	],
+	"transitions": [
+		{
+			"source": "Q0",
+			"target": "Q0",
+			"event": "a",
+			"actions": [
+				{
+					"type": "push",
+					"onTop": "Z0",
+					"element": "a"
+				},
+				{
+					"type": "push",
+					"onTop": "a",
+					"element": "a"
+				}
+			]
+		},
+		{
+			"source": "Q0",
+			"target": "Q1",
+			"event": "b",
+			"actions": [
+				{
+					"type": "pop",
+					"onTop": "a"
+				}
+			]
+		},
+		{
+			"source": "Q1",
+			"target": "Q1",
+			"event": "b",
+			"actions": [
+				{
+					"type": "pop",
+					"onTop": "a"
+				}
+			]
+		},
+		{
+			"source": "Q1",
+			"target": "QF",
+			"event": "!",
+			"actions": [
+				{
+					"type": "pop",
+					"onTop": "Z0"
+				}
+			]
+		}
+	]
+}

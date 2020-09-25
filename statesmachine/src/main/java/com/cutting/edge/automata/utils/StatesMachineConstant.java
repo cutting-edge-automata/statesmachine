@@ -12,5 +12,6 @@ public class StatesMachineConstant {
 
 	public final static String EPSILON = "!";
 	public final static String EOL = "$";
+	public final static String STACK_INITIALIZER = "Z0";
 
 }
