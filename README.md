@@ -1,5 +1,5 @@
 
-		StatesMachineBuilder builder = new StatesMachineBuilder();
+		StatesMachineBuilder builder = StatesMachineBuilder.of(StatesMachineType.FINITE_AUTOMATA);
 		StatesMachine machine = builder.withName("Finite Automata")
 									   .states()
 									   .initState("Q0")
