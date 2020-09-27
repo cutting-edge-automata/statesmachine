@@ -2,18 +2,12 @@ package com.cutting.edge.automata.action;
 
 public class StackAction {
 
-	public final String type;
 	public final String onTop;
 	public final String element;
 
-	public StackAction(String type, String onTop, String element) {
-		this.type = type;
+	public StackAction(String onTop, String element) {
 		this.onTop = onTop;
 		this.element = element;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public String getOnTop() {
@@ -26,7 +20,7 @@ public class StackAction {
 
 	@Override
 	public String toString() {
-		return "StackAction [type=" + type + ", onTop=" + onTop + ", element=" + element + "]";
+		return "StackAction [ onTop=" + onTop + ", element=" + element + "]";
 	}
 
 	

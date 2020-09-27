@@ -31,12 +31,10 @@
 			"event": "a",
 			"actions": [
 				{
-					"type": "push",
 					"onTop": "Z0",
 					"element": "a"
 				},
 				{
-					"type": "push",
 					"onTop": "a",
 					"element": "a"
 				}
@@ -48,8 +46,8 @@
 			"event": "b",
 			"actions": [
 				{
-					"type": "pop",
-					"onTop": "a"
+					"onTop": "a",
+					"element": "!"
 				}
 			]
 		},
@@ -59,8 +57,8 @@
 			"event": "b",
 			"actions": [
 				{
-					"type": "pop",
-					"onTop": "a"
+					"onTop": "a",
+					"element": "!"
 				}
 			]
 		},
@@ -70,8 +68,8 @@
 			"event": "!",
 			"actions": [
 				{
-					"type": "pop",
-					"onTop": "Z0"
+					"onTop": "Z0",
+					"element": "!"
 				}
 			]
 		}

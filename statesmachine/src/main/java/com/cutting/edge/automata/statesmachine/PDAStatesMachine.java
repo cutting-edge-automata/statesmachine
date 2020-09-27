@@ -51,16 +51,13 @@ public class PDAStatesMachine extends AbstractStatesMachine {
 	private void performTransition(State targetState, StackAction stackAction) {
 
 		setCurrentState(targetState);
-		switch (stackAction.getType()) {
-		case "push":
-			stack.push(stackAction.getElement());
-			break;
-		case "pop":
+		if (stackAction.getElement().equals(StatesMachineConstant.EPSILON))
 			stack.pop();
-			break;
-		}
-
+		else
+			stack.push(stackAction.getElement());
+				
 	}
+
 
 	private boolean transitionExist(State state, Event event) {
 		for (Transition transition : getTransitions()) {

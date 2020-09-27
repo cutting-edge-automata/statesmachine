@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.Action;
-
 import com.cutting.edge.automata.action.StackAction;
 import com.cutting.edge.automata.config.model.EventConfig;
 import com.cutting.edge.automata.config.model.StateConfig;
@@ -52,7 +50,7 @@ public class PDAStatesMachineAdapter {
 
 			PDATransition pdaTransition = new PDATransition(source, target, event);
 			pdaTransition.getActions().addAll(transitionConfig.getActions().stream()
-					.map(actionCondig -> new StackAction(actionCondig.getType(),actionCondig.getOnTop(), actionCondig.getElement()))
+					.map(actionCondig -> new StackAction(actionCondig.getOnTop(), actionCondig.getElement()))
 					.collect(Collectors.toSet()));
 			
 			transitions.add(pdaTransition);
